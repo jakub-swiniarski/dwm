@@ -1,2 +1,3 @@
 ## Changes:
-- changed colors.
+- changed colors,
+- added volume control for PulseAudio.
