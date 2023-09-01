@@ -9,4 +9,5 @@
 - Alt + F3 - increase the volume (PulseAudio).
 
 ## Removed functions:
-- toggle the bar on/off.
+- toggle the bar on/off,
+- increase/decrease the number of windows on master.
