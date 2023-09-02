@@ -80,7 +80,7 @@ static const Key keys[] = {
 	{ SUPER,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ SUPER,                       XK_Return, zoom,           {0} },
 	{ SUPER,                       XK_Tab,    view,           {0} },
-	{ SUPER|ShiftMask,             XK_c,      killclient,     {0} },
+	{ SUPER,		               XK_c,      killclient,     {0} },
 	{ SUPER,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ SUPER,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ SUPER,                       XK_m,      setlayout,      {.v = &layouts[2]} },
