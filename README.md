@@ -13,4 +13,4 @@
 ## Removed functions:
 - toggle the bar on/off,
 - increase/decrease the number of windows on master,
-- changing layout.
+- changing the layout.
