@@ -5,6 +5,13 @@
 - removed all layouts except tile.
 
 ## Keybindings:
+### Window and tag control
+- Super + R - spawn dmenu,
+- Super + T - spawn terminal,
+- Super + C - kill a window. <br/>
+
+**See more in config.h**
+
 ### Volume control (PulseAudio)
 - Alt + F1 - mute the sound,
 - Alt + F2 - lower the volume,
