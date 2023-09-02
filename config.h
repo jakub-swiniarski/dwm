@@ -69,8 +69,8 @@ static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ SUPER,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ SUPER|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ SUPER,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ SUPER,                       XK_t,      spawn,          {.v = termcmd } },
 	/*{ SUPER,                       XK_b,      togglebar,      {0} },*/
 	{ SUPER,                       XK_j,      focusstack,     {.i = +1 } },
 	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
