@@ -18,6 +18,6 @@
 - Alt + F3 - increase the volume.
 
 ## Removed functions:
-- toggle the bar on/off,
-- increase/decrease the number of windows on master,
+- toggling the bar on/off,
+- increasing/decreasing the number of windows on master,
 - changing the layout.
