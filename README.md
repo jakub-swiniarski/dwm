@@ -20,4 +20,5 @@
 ## Removed functions:
 - toggling the bar on/off,
 - increasing/decreasing the number of windows on master,
-- changing the layout.
+- changing the layout,
+- switching to previous tag.
