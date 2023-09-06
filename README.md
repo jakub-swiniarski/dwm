@@ -1,4 +1,5 @@
 # DWM - Dynamic Window Manager
+This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://suckless.org).
 
 ## Prerequisites:
 - xorg-server,
