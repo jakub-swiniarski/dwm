@@ -21,4 +21,5 @@
 - toggling the bar on/off,
 - increasing/decreasing the number of windows on master,
 - changing the layout,
-- switching to previous tag.
+- switching to previous tag,
+- increasing/decreasing master size.
