@@ -1,4 +1,11 @@
 # DWM - Dynamic Window Manager
+
+## Prerequisites:
+- xorg-server,
+- [st](https://st.suckless.org/),
+- [dmenu](https://tools.suckless.org/dmenu/),
+- [X initialization script](https://github.com/jakub-swiniarski/xinitrc) (optional).
+
 ## Changes:
 - changed colors,
 - added volume control for PulseAudio,
