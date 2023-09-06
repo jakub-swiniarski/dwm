@@ -87,7 +87,7 @@ static const Key keys[] = {
 	{ SUPER,                       XK_space,  setlayout,      {0} },
 	{ SUPER|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ SUPER,                       XK_0,      view,           {.ui = ~0 } },
-	{ SUPER|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	//{ SUPER|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ SUPER,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ SUPER,                       XK_period, focusmon,       {.i = +1 } },
 	{ SUPER|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
