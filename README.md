@@ -34,4 +34,6 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - increasing/decreasing master size,
 - making a window appear on all tags,
 - toggling to previous layout,
-- making an individual window float using keyboard.
+- making an individual window float using keyboard,
+- spawning a terminal using mouse,
+- moving a window to master using mouse.
