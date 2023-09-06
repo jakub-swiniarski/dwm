@@ -115,7 +115,7 @@ static const Button buttons[] = {
 	/*{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },*/
 	{ ClkClientWin,         SUPER,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         SUPER,         Button2,        togglefloating, {0} },
+	//{ ClkClientWin,         SUPER,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         SUPER,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
