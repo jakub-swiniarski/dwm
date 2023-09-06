@@ -22,4 +22,5 @@
 - increasing/decreasing the number of windows on master,
 - changing the layout,
 - switching to previous tag,
-- increasing/decreasing master size.
+- increasing/decreasing master size,
+- making a window appear on all tags.
