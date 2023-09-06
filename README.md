@@ -23,4 +23,6 @@
 - changing the layout,
 - switching to previous tag,
 - increasing/decreasing master size,
-- making a window appear on all tags.
+- making a window appear on all tags,
+- toggling to previous layout,
+- making an individual window float using keyboard.
