@@ -37,4 +37,5 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - making an individual window float using keyboard,
 - spawning a terminal using mouse,
 - moving a window to master using mouse,
-- changing the layout using mouse.
+- changing the layout using mouse,
+- making a window float using mouse.
