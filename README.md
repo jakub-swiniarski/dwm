@@ -1,4 +1,4 @@
-#DWM - Dynamic Window Manager
+# DWM - Dynamic Window Manager
 ## Changes:
 - changed colors,
 - added volume control for PulseAudio,
