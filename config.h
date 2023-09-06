@@ -76,8 +76,8 @@ static const Key keys[] = {
 	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
 	/*{ SUPER,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ SUPER,                       XK_d,      incnmaster,     {.i = -1 } },*/
-	{ SUPER,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ SUPER,                       XK_l,      setmfact,       {.f = +0.05} },
+	/*{ SUPER,                       XK_h,      setmfact,       {.f = -0.05} },
+	{ SUPER,                       XK_l,      setmfact,       {.f = +0.05} },*/
 	{ SUPER,                       XK_Return, zoom,           {0} },
 	/*{ SUPER,                       XK_Tab,    view,           {0} },*/
 	{ SUPER,		               XK_c,      killclient,     {0} },
