@@ -38,4 +38,6 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - spawning a terminal using mouse,
 - moving a window to master using mouse,
 - changing the layout using mouse,
-- making a window float using mouse.
+- making a window float using mouse,
+- moving a window to another tag using maouse,
+- copying the window to another tag using mouse.
