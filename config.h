@@ -119,7 +119,7 @@ static const Button buttons[] = {
 	{ ClkClientWin,         SUPER,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            SUPER,         Button1,        tag,            {0} },
-	{ ClkTagBar,            SUPER,         Button3,        toggletag,      {0} },
+	/*{ ClkTagBar,            SUPER,         Button1,        tag,            {0} },
+	{ ClkTagBar,            SUPER,         Button3,        toggletag,      {0} },*/
 };
 
