@@ -68,23 +68,11 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ SUPER,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ SUPER,                       XK_t,      spawn,          {.v = termcmd } },
-	/*{ SUPER,                       XK_b,      togglebar,      {0} },*/
 	{ SUPER,                       XK_j,      focusstack,     {.i = +1 } },
 	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
-	/*{ SUPER,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ SUPER,                       XK_d,      incnmaster,     {.i = -1 } },*/
-	/*{ SUPER,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ SUPER,                       XK_l,      setmfact,       {.f = +0.05} },*/
 	{ SUPER,                       XK_Return, zoom,           {0} },
-	/*{ SUPER,                       XK_Tab,    view,           {0} },*/
 	{ SUPER,		               XK_c,      killclient,     {0} },
-	/*{ SUPER,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ SUPER,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ SUPER,                       XK_m,      setlayout,      {.v = &layouts[2]} },*/
-	/*{ SUPER,                       XK_space,  setlayout,      {0} },
-	{ SUPER|ShiftMask,             XK_space,  togglefloating, {0} },*/
 	{ SUPER,                       XK_0,      view,           {.ui = ~0 } },
-	//{ SUPER|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ SUPER,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ SUPER,                       XK_period, focusmon,       {.i = +1 } },
 	{ SUPER|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -110,16 +98,7 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	/*{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },*/
-	/*{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },*/
 	{ ClkClientWin,         SUPER,         Button1,        movemouse,      {0} },
-	//{ ClkClientWin,         SUPER,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         SUPER,         Button3,        resizemouse,    {0} },
-	/*{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },*/
-	/*{ ClkTagBar,            SUPER,         Button1,        tag,            {0} },
-	{ ClkTagBar,            SUPER,         Button3,        toggletag,      {0} },*/
 };
 
