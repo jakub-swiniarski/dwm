@@ -66,7 +66,7 @@ static const Key keys[] = {
 	{ SUPER,                       XK_t,      spawn,          {.v = termcmd } },
 	{ SUPER,                       XK_j,      focusstack,     {.i = +1 } },
 	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
-	{ SUPER,                       XK_Return, zoom,           {0} },
+	{ SUPER,                       XK_z, 	  zoom,           {0} },
 	{ SUPER,		               XK_c,      killclient,     {0} },
 	{ SUPER,                       XK_0,      view,           {.ui = ~0 } },
 	{ SUPER,                       XK_comma,  focusmon,       {.i = -1 } },
