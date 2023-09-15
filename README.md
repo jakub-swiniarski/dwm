@@ -17,7 +17,8 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 ### Window and tag control
 - Super + R - spawn dmenu,
 - Super + T - spawn terminal,
-- Super + C - kill a window. <br/>
+- Super + C - kill a window,
+- Super + Z - move a window to master.<br/>
 
 **See more in config.h**
 
