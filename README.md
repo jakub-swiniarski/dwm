@@ -5,7 +5,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - xorg-server,
 - [st](https://st.suckless.org/),
 - [dmenu](https://tools.suckless.org/dmenu/),
-- [X initialization script](https://github.com/jakub-swiniarski/xinitrc) (optional).
+- [X initialization script](https://github.com/jakub-swiniarski/xinitrc).
 
 ## Changes:
 - changed colors,
