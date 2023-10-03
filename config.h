@@ -68,7 +68,6 @@ static const Key keys[] = {
 	{ SUPER,                       XK_k,      focusstack,     {.i = -1 } },
 	{ SUPER,                       XK_z, 	  zoom,           {0} },
 	{ SUPER,		               XK_c,      killclient,     {0} },
-	{ SUPER,                       XK_0,      view,           {.ui = ~0 } },
 	{ SUPER,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ SUPER,                       XK_period, focusmon,       {.i = +1 } },
 	{ SUPER|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -78,7 +77,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-
+	{ SUPER|ShiftMask,             XK_q,      quit,           {0} },
+	
 	/* volume control */
 	{ ALT,                       XK_F2,  spawn, {.v = downvol } },
 	{ ALT,                       XK_F1,  spawn, {.v = mutevol } },
