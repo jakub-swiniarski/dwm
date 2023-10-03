@@ -78,9 +78,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-	{ SUPER|ShiftMask,             XK_q,      quit,           {0} },
 
-	/* pulseaudio volume control */
+	/* volume control */
 	{ ALT,                       XK_F2,  spawn, {.v = downvol } },
 	{ ALT,                       XK_F1,  spawn, {.v = mutevol } },
 	{ ALT,                       XK_F3,  spawn, {.v = upvol   } },
