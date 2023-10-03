@@ -36,4 +36,5 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - making a window appear on all tags,
 - toggling to previous layout,
 - making an individual window float,
-- all mouse controls except resizing and moving windows.
+- all mouse controls except resizing and moving windows,
+- reduced amount of tags.
