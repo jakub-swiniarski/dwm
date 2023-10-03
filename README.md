@@ -38,4 +38,5 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - making an individual window float,
 - all mouse controls except resizing and moving windows,
 - reduced amount of tags. <br/>
+
 **And more! I want to make this WM as minimal as possible.**
