@@ -22,7 +22,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 
 **See more in config.h**
 
-### Volume control (PulseAudio)
+### Volume control (PipeWire)
 - Alt + F1 - mute the sound,
 - Alt + F2 - lower the volume,
 - Alt + F3 - increase the volume.
