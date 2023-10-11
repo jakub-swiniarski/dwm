@@ -9,7 +9,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 
 ## Changes:
 - changed colors,
-- added volume control for PipeWire (WirePlumber),
+- added volume control for PulseAudio,
 - removed functions and keybinding that I don't use,
 - removed all layouts except tile.
 
@@ -22,7 +22,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 
 **See more in config.h**
 
-### Volume control (PipeWire)
+### Volume control (PulseAudio)
 - Alt + F1 - mute the sound,
 - Alt + F2 - lower the volume,
 - Alt + F3 - increase the volume.
