@@ -7,11 +7,11 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_black[]       = "#000000";
 static const char col_white[]    	= "#ffffff";
-static const char col_green[]       = "#007800";
+static const char col_purple[]       = "#640078";
 static const char *colors[][3]      = {
 	/*               fg         bg          border   */
 	[SchemeNorm] = { col_white, col_black,   col_black },
-	[SchemeSel]  = { col_white, col_green,  col_green  },
+	[SchemeSel]  = { col_white, col_purple,  col_purple  },
 };
 
 /* tagging */
@@ -57,7 +57,7 @@ static const char *mutevol[]    = { "/usr/bin/pactl",   "set-sink-mute",   "@DEF
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_green, "-sf", col_white, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_purple, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
