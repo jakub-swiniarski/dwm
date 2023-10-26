@@ -3,7 +3,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 
 ## Prerequisites:
 - xorg-server,
-- alacritty
+- [st](https://github.com/jakub-swiniarski/xinitrc),
 - dmenu,
 - [X initialization script](https://github.com/jakub-swiniarski/xinitrc).
 
