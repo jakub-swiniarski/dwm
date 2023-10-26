@@ -27,7 +27,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - Alt + F2 - lower the volume,
 - Alt + F3 - increase the volume.
 
-## Removed functions:
+## Removed features:
 - toggling the bar on/off,
 - increasing/decreasing the number of windows on master,
 - changing the layout,
