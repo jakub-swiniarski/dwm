@@ -77,6 +77,7 @@ struct Client {
 };
 
 typedef struct {
+	int type;
 	unsigned int mod;
 	KeySym keysym;
 	void (*func)(const Arg *);
@@ -205,6 +206,9 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void togglebar(const Arg *arg);
+static void hidebar(const Arg *arg);
+static void showbar(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -225,6 +229,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
+	[KeyRelease] = keypress,
 	[MappingNotify] = mappingnotify,
 	[MapRequest] = maprequest,
 	[MotionNotify] = motionnotify,
@@ -610,7 +615,7 @@ createmon(void)
 	m->tagset[0] = m->tagset[1] = 1;
 	m->mfact = mfact;
 	m->nmaster = nmaster;
-	m->showbar = showbar;
+	m->showbar = 0;
 	m->topbar = topbar;
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
@@ -664,6 +669,31 @@ dirtomon(int dir)
 	else
 		for (m = mons; m->next != selmon; m = m->next);
 	return m;
+}
+
+void
+togglebar(const Arg *arg)
+{
+	selmon->showbar = (selmon->showbar == 2 ? 1 : !selmon->showbar);
+	updatebarpos(selmon);
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+	arrange(selmon);
+}
+
+void
+showbar(const Arg *arg)
+{
+	if (!selmon->showbar) {
+		togglebar(arg);
+		selmon->showbar = 2;
+	}
+}
+
+void hidebar(const Arg *arg){
+	if(selmon->showbar == 2){
+		selmon->showbar = 1;
+		togglebar(arg);
+	}
 }
 
 void
@@ -969,6 +999,7 @@ keypress(XEvent *e)
 	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
 	for (i = 0; i < LENGTH(keys); i++)
 		if (keysym == keys[i].keysym
+		&& ev->type == keys[i].type
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
 		&& keys[i].func)
 			keys[i].func(&(keys[i].arg));
