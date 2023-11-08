@@ -724,7 +724,7 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-	x = m->mw/2-(TEXTW(tags[0])*LENGTH(tags))/2;
+	x = m->mw/2-(TEXTW(tags[0])*LENGTH(tags))/2-TEXTW(stext)/2;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
