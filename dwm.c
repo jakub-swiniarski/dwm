@@ -91,7 +91,6 @@ typedef struct {
 } Layout;
 
 struct Monitor {
-	char ltsymbol[16];
 	float mfact;
 	int nmaster;
 	int num;
@@ -373,7 +372,6 @@ arrange(Monitor *m)
 void
 arrangemon(Monitor *m)
 {
-	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
 	if (m->lt[m->sellt]->arrange)
 		m->lt[m->sellt]->arrange(m);
 }
@@ -416,8 +414,7 @@ buttonpress(XEvent *e)
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
-		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
-			click = ClkLtSymbol;
+		}
 		else if (ev->x > selmon->ww - (int)TEXTW(stext))
 			click = ClkStatusText;
 		else
@@ -619,7 +616,6 @@ createmon(void)
 	m->topbar = topbar;
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
-	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
 	return m;
 }
 
@@ -740,7 +736,7 @@ drawbar(Monitor *m)
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
 		drw_text(drw, x, 0, tw, bh, 0, stext, 0);
 	}
-	w = TEXTW(m->ltsymbol);
+	//w = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	//x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
