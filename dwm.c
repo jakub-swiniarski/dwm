@@ -688,12 +688,12 @@ showbar(const Arg *arg)
 		strcat(buffer,hours);
 		strcpy(hours,buffer);
 	}
+	sprintf(minutes, "%d", now_tm->tm_min); 
 	if(now_tm->tm_min<10){
 		char buffer[4]="0";
 		strcat(buffer,minutes);
 		strcpy(minutes,buffer);
-	} 
-	sprintf(minutes, "%d", now_tm->tm_min);
+	}	
 
 	if (!selmon->showbar) {
 		togglebar(arg);
