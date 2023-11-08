@@ -683,6 +683,16 @@ showbar(const Arg *arg)
 	struct tm *now_tm=localtime(&now);
 	char hours[4], minutes[4];
 	sprintf(hours, "%d", now_tm->tm_hour);
+	if(now_tm->tm_hour<10){
+		char buffer[4]="0";
+		strcat(buffer,hours);
+		strcpy(hours,buffer);
+	}
+	if(now_tm->tm_min<10){
+		char buffer[4]="0";
+		strcat(buffer,minutes);
+		strcpy(minutes,buffer);
+	} 
 	sprintf(minutes, "%d", now_tm->tm_min);
 
 	if (!selmon->showbar) {
