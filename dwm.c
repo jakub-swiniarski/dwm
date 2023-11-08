@@ -17,6 +17,7 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
+#include <time.h>
 
 #include "drw.h"
 #include "util.h"
@@ -682,10 +683,21 @@ togglebar(const Arg *arg)
 void
 showbar(const Arg *arg)
 {
+	time_t now=time(NULL);
+	struct tm *now_tm=localtime(&now);
+	char hours[4], minutes[4];
+	sprintf(hours, "%d", now_tm->tm_hour);
+	sprintf(minutes, "%d", now_tm->tm_min);
+
 	if (!selmon->showbar) {
 		togglebar(arg);
 		selmon->showbar = 2;
 	}
+
+	strcpy(stext, "| ");
+	strcat(stext, hours);
+	strcat(stext, ":");
+	strcat(stext, minutes);
 }
 
 void hidebar(const Arg *arg){
