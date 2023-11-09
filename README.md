@@ -11,7 +11,9 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - changed colors,
 - added volume control for PulseAudio,
 - removed functions and keybinding that I don't use,
-- removed all layouts except tile.
+- removed all layouts except tile,
+- centered status bar,
+- the bar only appears when the SUPER key is held.
 
 ## Keybindings:
 ### Window and tag control
