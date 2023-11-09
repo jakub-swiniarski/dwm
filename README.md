@@ -8,10 +8,10 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - [X initialization script](https://github.com/jakub-swiniarski/xinitrc).
 
 ## Changes:
+- removed many features that I don't use,
+- reduced amount of tags,
 - changed colors,
 - added volume control for PulseAudio,
-- removed functions and keybinding that I don't use,
-- removed all layouts except tile,
 - centered status bar,
 - the bar only appears when the SUPER key is held.
 
@@ -28,17 +28,3 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - Alt + F1 - mute the sound,
 - Alt + F2 - lower the volume,
 - Alt + F3 - increase the volume.
-
-## Removed features:
-- toggling the bar on/off,
-- increasing/decreasing the number of windows on master,
-- changing the layout,
-- switching to previous tag,
-- increasing/decreasing master size,
-- making a window appear on all tags,
-- toggling to previous layout,
-- making an individual window float,
-- all mouse controls except resizing and moving windows,
-- reduced amount of tags. <br/>
-
-**And more! I want to make this WM as minimal as possible.**
