@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <locale.h>
 #include <signal.h>
 #include <stdarg.h>
@@ -70,7 +71,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+	bool isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -100,8 +101,8 @@ struct Monitor {
 	unsigned int seltags;
 	unsigned int sellt;
 	unsigned int tagset[2];
-	int showbar;
-	int topbar;
+	bool showbar;
+	bool topbar;
 	Client *clients;
 	Client *sel;
 	Client *stack;
@@ -115,7 +116,7 @@ typedef struct {
 	const char *instance;
 	const char *title;
 	unsigned int tags;
-	int isfloating;
+	bool isfloating;
 	int monitor;
 } Rule;
 
@@ -236,7 +237,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[UnmapNotify] = unmapnotify
 };
 static Atom wmatom[WMLast], netatom[NetLast];
-static int running = 1;
+static bool running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
 static Display *dpy;
@@ -1439,7 +1440,7 @@ sendevent(Client *c, Atom proto)
 {
 	int n;
 	Atom *protocols;
-	int exists = 0;
+	bool exists = 0;
 	XEvent ev;
 
 	if (XGetWMProtocols(dpy, c->win, &protocols, &n)) {
