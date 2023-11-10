@@ -670,7 +670,7 @@ dirtomon(int dir)
 void
 togglebar(const Arg *arg)
 {
-	selmon->showbar = (selmon->showbar == 2 ? 1 : !selmon->showbar);
+	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-125, selmon->by, 250, bh);
 	arrange(selmon);
@@ -697,7 +697,6 @@ showbar(const Arg *arg)
 
 	if (!selmon->showbar) {
 		togglebar(arg);
-		selmon->showbar = 2;
 	}
 
 	strcpy(stext, "| ");
@@ -707,8 +706,7 @@ showbar(const Arg *arg)
 }
 
 void hidebar(const Arg *arg){
-	if(selmon->showbar == 2){
-		selmon->showbar = 1;
+	if(selmon->showbar){
 		togglebar(arg);
 	}
 }
