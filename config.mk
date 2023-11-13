@@ -1,7 +1,4 @@
-# dwm version
 VERSION = 6.4
-
-# Customize below to fit your system
 
 # paths
 PREFIX = /usr/local
