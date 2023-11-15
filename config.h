@@ -50,13 +50,11 @@ static const char *mutevol[]    = { "/usr/bin/pactl",   "set-sink-mute",   "@DEF
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_purple, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *browser[]  = { "surf", NULL };
 
 static const Key keys[] = {
 	/*           modifier                       key      function           argument */
 	{ KeyPress,   SUPER,                       XK_r,       spawn,          {.v = dmenucmd } },
 	{ KeyPress,   SUPER,                       XK_t,       spawn,          {.v = termcmd } },
-	{ KeyPress,   SUPER,                       XK_b,       spawn,          {.v = browser } },
 	{ KeyPress,   SUPER,                       XK_j,       focusstack,     {.i = +1 } },
 	{ KeyPress,   SUPER,                       XK_k,       focusstack,     {.i = -1 } },
 	{ KeyPress,   SUPER,                       XK_z, 	   zoom,           {0} },
