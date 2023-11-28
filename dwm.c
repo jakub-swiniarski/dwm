@@ -64,7 +64,6 @@ typedef struct {
 typedef struct Monitor Monitor;
 typedef struct Client Client;
 struct Client {
-	char name[256];
 	float mina, maxa;
 	int x, y, w, h;
 	int oldx, oldy, oldw, oldh;
@@ -690,7 +689,6 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 	x=0;
-	//x = m->mw/2-(TEXTW(tags[0])*LENGTH(tags))/2-TEXTW(stext)/2;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
@@ -706,21 +704,6 @@ drawbar(Monitor *m)
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
 		drw_text(drw, x, 0, tw, bh, 0, stext, 0);
 	}
-	//w = TEXTW(m->ltsymbol);
-	//drw_setscheme(drw, scheme[SchemeNorm]);
-	//x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
-
-	/*if ((w = m->ww - tw - x) > bh) {
-		if (m->sel) {
-			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-			if (m->sel->isfloating)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
-		} else {
-			drw_setscheme(drw, scheme[SchemeNorm]);
-			drw_rect(drw, x, 0, w, bh, 1, 1);
-		}
-	}*/
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
