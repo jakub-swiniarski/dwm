@@ -207,7 +207,7 @@ static void hidebar(const Arg *arg);
 static void showbar(const Arg *arg);
 
 /* variables */
-static char stext[16];
+static char stext[8];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
