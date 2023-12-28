@@ -113,7 +113,6 @@ typedef struct {
 /* function declarations */
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
 static void arrange(Monitor *m);
-static void arrangemon(Monitor *m);
 static void attach(Client *c);
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
@@ -314,16 +313,10 @@ arrange(Monitor *m)
 	else for (m = mons; m; m = m->next)
 		showhide(m->stack);
 	if (m) {
-		arrangemon(m);
+		tile(m);
 		restack(m);
 	} else for (m = mons; m; m = m->next)
-		arrangemon(m);
-}
-
-void
-arrangemon(Monitor *m)
-{
-	tile(m);
+		tile(m);
 }
 
 void
