@@ -100,7 +100,6 @@ struct Monitor {
 	unsigned int sellt;
 	unsigned int tagset[2];
 	int showbar;
-	int topbar;
 	Client *clients;
 	Client *sel;
 	Client *stack;
@@ -572,7 +571,6 @@ createmon(void)
 	m->mfact = mfact;
 	m->nmaster = nmaster;
 	m->showbar = 0;
-	m->topbar = topbar;
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
 	return m;
@@ -1714,11 +1712,11 @@ updatebarpos(Monitor *m)
 	m->wy = m->my;
 	m->wh = m->mh;
 	if (m->showbar) {
-		m->by = m->topbar ? m->wy : m->wy + m->wh - bh;
-		m->wy = m->topbar ? m->wy - bh + bh : m->wy;
-	} else {
+		m->by = m->wy + m->wh - bh; //m->wy if u want bar on top
+		m->wy = m->wy; //m->wy - bh + bh if u want bar on top 
+	} 
+	else
 		m->by = -bh;
-	}
 }
 
 void
