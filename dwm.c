@@ -596,50 +596,6 @@ dirtomon(int dir)
 }
 
 void
-togglebar(const Arg *arg)
-{
-	selmon->showbar = !selmon->showbar;
-	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-125, selmon->by, 250, bh);
-	arrange(selmon);
-}
-
-void
-showbar(const Arg *arg)
-{
-	time_t now=time(NULL);
-	struct tm *now_tm=localtime(&now);
-	char hours[4], minutes[4];
-	sprintf(hours, "%d", now_tm->tm_hour);
-	if(now_tm->tm_hour<10){
-		char buffer[4]="0";
-		strcat(buffer,hours);
-		strcpy(hours,buffer);
-	}
-	sprintf(minutes, "%d", now_tm->tm_min); 
-	if(now_tm->tm_min<10){
-		char buffer[4]="0";
-		strcat(buffer,minutes);
-		strcpy(minutes,buffer);
-	}	
-
-	if (!selmon->showbar) {
-		togglebar(arg);
-	}
-
-	strcpy(stext, "| ");
-	strcat(stext, hours);
-	strcat(stext, ":");
-	strcat(stext, minutes);
-}
-
-void hidebar(const Arg *arg){
-	if(selmon->showbar){
-		togglebar(arg);
-	}
-}
-
-void
 drawbar(Monitor *m)
 {
 	int x, w, tw = 0;
@@ -878,6 +834,12 @@ grabkeys(void)
 							 root, True,
 							 GrabModeAsync, GrabModeAsync);
 		XFree(syms);
+	}
+}
+
+void hidebar(const Arg *arg){
+	if(selmon->showbar){
+		togglebar(arg);
 	}
 }
 
@@ -1292,31 +1254,6 @@ scan(void)
 	}
 }
 
-void
-sendmon(Client *c, Monitor *m)
-{
-	if (c->mon == m)
-		return;
-	unfocus(c, 1);
-	detach(c);
-	detachstack(c);
-	c->mon = m;
-	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-	attach(c);
-	attachstack(c);
-	focus(NULL);
-	arrange(NULL);
-}
-
-void
-setclientstate(Client *c, long state)
-{
-	long data[] = { state, None };
-
-	XChangeProperty(dpy, c->win, wmatom[WMState], wmatom[WMState], 32,
-		PropModeReplace, (unsigned char *)data, 2);
-}
-
 int
 sendevent(Client *c, Atom proto)
 {
@@ -1340,6 +1277,31 @@ sendevent(Client *c, Atom proto)
 		XSendEvent(dpy, c->win, False, NoEventMask, &ev);
 	}
 	return exists;
+}
+
+void
+sendmon(Client *c, Monitor *m)
+{
+	if (c->mon == m)
+		return;
+	unfocus(c, 1);
+	detach(c);
+	detachstack(c);
+	c->mon = m;
+	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
+	attach(c);
+	attachstack(c);
+	focus(NULL);
+	arrange(NULL);
+}
+
+void
+setclientstate(Client *c, long state)
+{
+	long data[] = { state, None };
+
+	XChangeProperty(dpy, c->win, wmatom[WMState], wmatom[WMState], 32,
+		PropModeReplace, (unsigned char *)data, 2);
 }
 
 void
@@ -1472,6 +1434,35 @@ seturgent(Client *c, int urg)
 }
 
 void
+showbar(const Arg *arg)
+{
+	time_t now=time(NULL);
+	struct tm *now_tm=localtime(&now);
+	char hours[4], minutes[4];
+	sprintf(hours, "%d", now_tm->tm_hour);
+	if(now_tm->tm_hour<10){
+		char buffer[4]="0";
+		strcat(buffer,hours);
+		strcpy(hours,buffer);
+	}
+	sprintf(minutes, "%d", now_tm->tm_min); 
+	if(now_tm->tm_min<10){
+		char buffer[4]="0";
+		strcat(buffer,minutes);
+		strcpy(minutes,buffer);
+	}	
+
+	if (!selmon->showbar) {
+		togglebar(arg);
+	}
+
+	strcpy(stext, "| ");
+	strcat(stext, hours);
+	strcat(stext, ":");
+	strcat(stext, minutes);
+}
+
+void
 showhide(Client *c)
 {
 	if (!c)
@@ -1555,6 +1546,15 @@ tile(Monitor *m)
 			if (ty + HEIGHT(c) < m->wh)
 				ty += HEIGHT(c);
 		}
+}
+
+void
+togglebar(const Arg *arg)
+{
+	selmon->showbar = !selmon->showbar;
+	updatebarpos(selmon);
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-125, selmon->by, 250, bh);
+	arrange(selmon);
 }
 
 void
