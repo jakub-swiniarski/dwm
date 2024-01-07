@@ -2,6 +2,8 @@
 This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://suckless.org).
 
 ## Prerequisites:
+- gcc,
+- make,
 - xorg-server,
 - [st](https://github.com/jakub-swiniarski/st),
 - dmenu,
