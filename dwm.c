@@ -1945,7 +1945,7 @@ zoom(const Arg *arg)
 }
 
 int
-main(int argc, char *argv[])
+main()
 {
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
 		fputs("warning: no locale support\n", stderr);
