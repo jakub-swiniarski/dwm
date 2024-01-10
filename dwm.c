@@ -76,7 +76,6 @@ struct Client {
 };
 
 typedef struct {
-	int type;
 	unsigned int mod;
 	KeySym keysym;
 	void (*func)(const Arg *);
@@ -131,7 +130,6 @@ static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
-static void hidebar(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
@@ -157,7 +155,6 @@ static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setup(void);
 static void seturgent(Client *c, int urg);
-static void showbar(const Arg *arg);
 static void showhide(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
@@ -202,7 +199,6 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
-	[KeyRelease] = keypress,
 	[MappingNotify] = mappingnotify,
 	[MapRequest] = maprequest,
 	[MotionNotify] = motionnotify,
@@ -828,12 +824,6 @@ grabkeys(void)
 	}
 }
 
-void hidebar(const Arg *arg){
-	if(selmon->showbar){
-		togglebar(arg);
-	}
-}
-
 #ifdef XINERAMA
 static int
 isuniquegeom(XineramaScreenInfo *unique, size_t n, XineramaScreenInfo *info)
@@ -857,7 +847,6 @@ keypress(XEvent *e)
 	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
 	for (i = 0; i < LENGTH(keys); i++)
 		if (keysym == keys[i].keysym
-		&& ev->type == keys[i].type
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
 		&& keys[i].func)
 			keys[i].func(&(keys[i].arg));
@@ -1422,14 +1411,6 @@ seturgent(Client *c, int urg)
 	wmh->flags = urg ? (wmh->flags | XUrgencyHint) : (wmh->flags & ~XUrgencyHint);
 	XSetWMHints(dpy, c->win, wmh);
 	XFree(wmh);
-}
-
-void
-showbar(const Arg *arg)
-{
-	if (!selmon->showbar) {
-		togglebar(arg);
-	}
 }
 
 void
