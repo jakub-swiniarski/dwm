@@ -17,8 +17,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - reduced amount of tags,
 - changed colors,
 - added volume control for PulseAudio,
-- centered status bar,
-- the bar only appears when the SUPER key is held.
+- centered status bar.
 
 ## Keybindings:
 ### Window and tag control
