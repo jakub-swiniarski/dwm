@@ -616,7 +616,7 @@ drawbar(Monitor *m)
 				urg & 1 << i);
 		x += w;
 	}
-	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
+	drw_map(drw, m->barwin, 0, 0, bw, bh);
 }
 
 void
