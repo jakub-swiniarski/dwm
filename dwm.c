@@ -185,6 +185,7 @@ static void zoom(const Arg *arg);
 /* variables */
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
+static int bw;               /* bar width */
 static int bh;               /* bar height */
 static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
@@ -1350,6 +1351,7 @@ setup(void)
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
+	bw=LENGTH(tags)*TEXTW(tags[0]);
 	bh = drw->fonts->h + 2;
 	updategeom();
 	/* init atoms */
@@ -1502,10 +1504,9 @@ tile(Monitor *m)
 void
 togglebar(const Arg *arg)
 {
-	int width=LENGTH(tags)*TEXTW(tags[0]);
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-width/2, selmon->by, width, bh);
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx+selmon->ww/2-bw/2, selmon->by, bw, bh);
 }
 
 void
