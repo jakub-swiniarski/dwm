@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -187,7 +186,6 @@ static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
 /* variables */
-static char stext[8];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
@@ -339,7 +337,7 @@ buttonpress(XEvent *e)
 		selmon = m;
 		focus(NULL);
 	}
-	if (ev->window == selmon->barwin) {
+	if (ev->window == selmon->barwin) { //TODO: TERMINATE
 		i = x = 0;
 		do
 			x += TEXTW(tags[i]);
@@ -348,8 +346,6 @@ buttonpress(XEvent *e)
 			click = ClkTagBar;
 			arg.ui = 1 << i;
 		}
-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
-			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
@@ -598,7 +594,7 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-	int x, w, tw = 0;
+	int x, w = 0;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
@@ -622,11 +618,6 @@ drawbar(Monitor *m)
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 				urg & 1 << i);
 		x += w;
-	}
-	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, x, 0, tw, bh, 0, stext, 0);
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
@@ -1436,10 +1427,6 @@ seturgent(Client *c, int urg)
 void
 showbar(const Arg *arg)
 {
-	time_t now=time(NULL);
-	struct tm *now_tm=localtime(&now);
-	sprintf(stext,"| %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
-
 	if (!selmon->showbar) {
 		togglebar(arg);
 	}
@@ -1534,10 +1521,10 @@ tile(Monitor *m)
 void
 togglebar(const Arg *arg)
 {
+	int width=LENGTH(tags)*TEXTW(tags[0]);
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-125, selmon->by, 250, bh);
-	arrange(selmon);
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->ww/2-width/2, selmon->by, width, bh);
 }
 
 void
