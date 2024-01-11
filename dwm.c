@@ -536,7 +536,7 @@ createmon(void)
 	m->tagset[0] = m->tagset[1] = 1;
 	m->mfact = mfact;
 	m->nmaster = nmaster;
-	m->showbar = 0;
+	m->showbar = 1;
 	return m;
 }
 
