@@ -29,9 +29,6 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 	{ SUPER|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ SUPER|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
 /* pulseaudio volume control */
 static const char *upvol[]      = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "+10%",      NULL };
 static const char *downvol[]    = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "-10%",      NULL };
