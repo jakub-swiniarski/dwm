@@ -2,13 +2,10 @@
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const char *fonts[]          = { "monospace:size=12" };
-static const char col_black[]       = "#000000";
-static const char col_white[]    	= "#ffffff";
-static const char col_purple[]       = "#960f96";
 static const char *colors[][3]      = {
 	/*               fg         bg          border   */
-	[SchemeNorm] = { col_white, col_black,   col_black },
-	[SchemeSel]  = { col_white, col_purple,  col_purple  },
+	[SchemeNorm] = { "#ffffff", "#000000",  "#000000" },
+	[SchemeSel]  = { "#ffffff", "#960f96",  "#960f96" },
 };
 
 /* tagging */
