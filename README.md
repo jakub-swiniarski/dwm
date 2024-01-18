@@ -22,7 +22,7 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 ## Keybindings:
 ### Window and tag control
 - Super + R - spawn dmenu,
-- Super + T - spawn terminal (st by default),
+- Super + T - spawn a terminal (st by default),
 - Super + C - kill a window,
 - Super + Z - move a window to master.<br/>
 
