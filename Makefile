@@ -1,26 +1,14 @@
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+SOURCES=$(wildcard *.c)
+HEADERS=$(wildcard *.h)
+OBJECTS=$(SOURCES:.c=.o)
 
-XINERAMALIBS  = -lXinerama
-XINERAMAFLAGS = -DXINERAMA
+dwm: $(OBJECTS)
+	gcc -o dwm $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
 
-FREETYPELIBS = -lfontconfig -lXft
-FREETYPEINC = /usr/include/freetype2
+$(OBJECTS): $(SOURCES) $(HEADERS)
+	gcc -c $(SOURCES) -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA
 
-INCS = -I$(X11INC) -I$(FREETYPEINC)
-LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS)
-
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L $(XINERAMAFLAGS)
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -O2 $(INCS) $(CPPFLAGS)
-LDFLAGS  = $(LIBS)
-
-SRC = drw.c dwm.c util.c
-OBJ = $(SRC:.c=.o)
-
-dwm: $(OBJ)
-	gcc -o dwm $(OBJ) $(LDFLAGS)
-
-$(OBJ): config.h
+.PHONY: clean install uninstall
 
 clean:
 	rm -f dwm $(OBJ)
@@ -30,5 +18,3 @@ install: dwm
 
 uninstall:
 	rm -f /usr/local/bin/dwm 
-
-.PHONY: clean install uninstall
