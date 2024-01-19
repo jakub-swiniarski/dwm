@@ -11,7 +11,7 @@ $(OBJECTS): $(SOURCES) $(HEADERS)
 .PHONY: clean install uninstall
 
 clean:
-	rm -f dwm $(OBJ)
+	rm -f dwm $(OBJECTS)
 
 install: dwm
 	cp -f dwm /usr/local/bin/
