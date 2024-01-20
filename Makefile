@@ -3,7 +3,7 @@ HEADERS=$(wildcard *.h)
 OBJECTS=$(SOURCES:.c=.o)
 
 dwm: $(OBJECTS)
-	gcc -o dwm $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
+	gcc -o $@ $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
 
 $(OBJECTS): $(SOURCES) $(HEADERS)
 	gcc -c $(SOURCES) -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA
