@@ -43,10 +43,10 @@ static const Key keys[] = {
 	{ SUPER,                       XK_k,       focusstack,     {.i = -1 } },
 	{ SUPER,                       XK_z, 	   zoom,           {0} },
 	{ SUPER,		               XK_c,       killclient,     {0} },
-	{ SUPER,                       XK_comma,   focusmon,       {.i = -1 } },
-	{ SUPER,                       XK_period,  focusmon,       {.i = +1 } },
-	{ SUPER|ShiftMask,             XK_comma,   tagmon,         {.i = -1 } },
-	{ SUPER|ShiftMask,             XK_period,  tagmon,         {.i = +1 } },
+	{ SUPER,                       XK_h,       focusmon,       {.i = -1 } },
+	{ SUPER,                       XK_l,       focusmon,       {.i = +1 } },
+	{ SUPER|ShiftMask,             XK_h,       tagmon,         {.i = -1 } },
+	{ SUPER|ShiftMask,             XK_l,       tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
