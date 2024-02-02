@@ -214,11 +214,7 @@ static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
 
-/* configuration, allows nested code to access above variables */
 #include "config.h"
-
-/* compile-time check if all tags fit into an unsigned int bit array. */
-struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
 /* function implementations */
 int
@@ -1603,8 +1599,8 @@ updatebarpos(Monitor *m)
 	m->wy = m->my;
 	m->wh = m->mh;
 	if (m->showbar) {
-		m->by = m->wy + m->wh - bh; //m->wy if u want bar on top
-		m->wy = m->wy; //m->wy - bh + bh if u want bar on top 
+		m->by = m->wy + m->wh - bh;
+		m->wy = m->wy;
 	} 
 	else
 		m->by = -bh;
