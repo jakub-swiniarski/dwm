@@ -56,9 +56,9 @@ static const Key keys[] = {
 	{ SUPER,                       XK_b,       togglebar,      {0} },
 
 	/* volume control */
+	{ ALT,                       XK_F3,  spawn, {.v = upvol   } },
 	{ ALT,                       XK_F2,  spawn, {.v = downvol } },
 	{ ALT,                       XK_F1,  spawn, {.v = mutevol } },
-	{ ALT,                       XK_F3,  spawn, {.v = upvol   } },
 };
 
 /* button definitions */
