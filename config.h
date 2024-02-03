@@ -14,7 +14,6 @@ static const char *tags[] = { "1", "2", "3", "4", "5"};
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 /* key definitions */
 #define ALT Mod1Mask
