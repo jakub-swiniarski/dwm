@@ -7,7 +7,6 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 - xorg-server,
 - [st](https://github.com/jakub-swiniarski/st),
 - [dmenu](https://github.com/jakub-swiniarski/dmenu),
-- [X initialization script](https://github.com/jakub-swiniarski/xinitrc),
 - libx11,
 - libxft,
 - libxinerama.
