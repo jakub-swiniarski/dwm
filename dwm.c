@@ -82,7 +82,6 @@ typedef struct {
 } Key;
 
 struct Monitor {
-	int nmaster;
 	int num;
 	int by;               /* bar geometry */
 	int mx, my, mw, mh;   /* screen size */
@@ -446,7 +445,6 @@ createmon(void)
 
 	m = ecalloc(1, sizeof(Monitor));
 	m->tagset[0] = m->tagset[1] = 1;
-	m->nmaster = nmaster;
 	m->showbar = 1;
 	return m;
 }
@@ -1387,13 +1385,13 @@ tile(Monitor *m)
 	if (n == 0)
 		return;
 
-	if (n > m->nmaster)
-		mw = m->nmaster ? m->ww * mfact : 0;
+	if (n > nmaster)
+		mw = nmaster ? m->ww * mfact : 0;
 	else
 		mw = m->ww;
 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+		if (i < nmaster) {
+			h = (m->wh - my) / (MIN(n, nmaster) - i);
 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw));
 			if (my + HEIGHT(c) < m->wh)
 				my += HEIGHT(c);
