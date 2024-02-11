@@ -6,7 +6,7 @@ dwm: $(OBJECTS)
 	gcc -o $@ $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
 
 $(OBJECTS): $(SOURCES) $(HEADERS)
-	gcc -c $(SOURCES) -std=c99 -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA
+	gcc -c $(SOURCES) -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA
 
 .PHONY: clean install uninstall
 
