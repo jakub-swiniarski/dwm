@@ -5,7 +5,7 @@ static const char *fonts[]          = { "monospace:size=12" };
 static const char *colors[][3]      = {
 	/*               fg         bg          border   */
 	[SchemeNorm] = { "#ffffff", "#000000",  "#000000" },
-	[SchemeSel]  = { "#ffffff", "#960f96",  "#960f96" },
+	[SchemeSel]  = { "#ffffff", "#646464",  "#646464" },
 };
 
 /* tagging */
