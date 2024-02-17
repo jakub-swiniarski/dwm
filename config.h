@@ -3,9 +3,9 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const char *fonts[]          = { "monospace:size=12" };
 static const char *colors[][3]      = {
-	/*               fg         bg          border   */
-	[SchemeNorm] = { "#ffffff", "#000000",  "#000000" },
-	[SchemeSel]  = { "#ffffff", "#646464",  "#646464" },
+	/*               fg         bg (also used for borders)               */
+	[SchemeNorm] = { "#ffffff", "#000000" },
+	[SchemeSel]  = { "#ffffff", "#646464" },
 };
 
 /* tagging */
