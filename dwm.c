@@ -31,7 +31,7 @@
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
-#define TAGMASK                 ((1 << LENGTH(tags)) - 1)
+#define TAGMASK                 ((1 << LENGTH(TAGS)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
@@ -260,10 +260,10 @@ buttonpress(XEvent *e)
 		XAllowEvents(dpy, ReplayPointer, CurrentTime);
 		click = ClkClientWin;
 	}
-	for (i = 0; i < LENGTH(buttons); i++)
-		if (click == buttons[i].click && buttons[i].func && buttons[i].button == ev->button
-		&& CLEANMASK(buttons[i].mask) == CLEANMASK(ev->state))
-			buttons[i].func(&buttons[i].arg);
+	for (i = 0; i < LENGTH(BUTTONS); i++)
+		if (click == BUTTONS[i].click && BUTTONS[i].func && BUTTONS[i].button == ev->button
+		&& CLEANMASK(BUTTONS[i].mask) == CLEANMASK(ev->state))
+			BUTTONS[i].func(&BUTTONS[i].arg);
 }
 
 void
@@ -282,7 +282,7 @@ cleanup(void)
 		cleanupmon(mons);
 	for (i = 0; i < CurLast; i++)
 		drw_cur_free(drw, cursor[i]);
-	for (i = 0; i < LENGTH(colors); i++)
+	for (i = 0; i < LENGTH(COLORS); i++)
 		free(scheme[i]);
 	free(scheme);
 	XDestroyWindow(dpy, wmcheckwin);
@@ -502,10 +502,10 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 	x=0;
-	for (i = 0; i < LENGTH(tags); i++) {
-		w = TEXTW(tags[i]);
+	for (i = 0; i < LENGTH(TAGS); i++) {
+		w = TEXTW(TAGS[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+		drw_text(drw, x, 0, w, bh, lrpad / 2, TAGS[i], urg & 1 << i);
 		if (occ & 1 << i)
 			drw_rect(drw, x + boxs, boxs, boxw, boxw,
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
@@ -683,11 +683,11 @@ grabbuttons(Client *c, int focused)
 		if (!focused)
 			XGrabButton(dpy, AnyButton, AnyModifier, c->win, False,
 				BUTTONMASK, GrabModeSync, GrabModeSync, None, None);
-		for (i = 0; i < LENGTH(buttons); i++)
-			if (buttons[i].click == ClkClientWin)
+		for (i = 0; i < LENGTH(BUTTONS); i++)
+			if (BUTTONS[i].click == ClkClientWin)
 				for (j = 0; j < LENGTH(modifiers); j++)
-					XGrabButton(dpy, buttons[i].button,
-						buttons[i].mask | modifiers[j],
+					XGrabButton(dpy, BUTTONS[i].button,
+						BUTTONS[i].mask | modifiers[j],
 						c->win, False, BUTTONMASK,
 						GrabModeAsync, GrabModeSync, None, None);
 	}
@@ -709,12 +709,12 @@ grabkeys(void)
 		if (!syms)
 			return;
 		for (k = start; k <= end; k++)
-			for (i = 0; i < LENGTH(keys); i++)
+			for (i = 0; i < LENGTH(KEYS); i++)
 				/* skip modifier codes, we do that ourselves */
-				if (keys[i].keysym == syms[(k - start) * skip])
+				if (KEYS[i].keysym == syms[(k - start) * skip])
 					for (j = 0; j < LENGTH(modifiers); j++)
 						XGrabKey(dpy, k,
-							 keys[i].mod | modifiers[j],
+							 KEYS[i].mod | modifiers[j],
 							 root, True,
 							 GrabModeAsync, GrabModeAsync);
 		XFree(syms);
@@ -742,11 +742,11 @@ keypress(XEvent *e)
 
 	ev = &e->xkey;
 	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
-	for (i = 0; i < LENGTH(keys); i++)
-		if (keysym == keys[i].keysym
-		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
-		&& keys[i].func)
-			keys[i].func(&(keys[i].arg));
+	for (i = 0; i < LENGTH(KEYS); i++)
+		if (keysym == KEYS[i].keysym
+		&& CLEANMASK(KEYS[i].mod) == CLEANMASK(ev->state)
+		&& KEYS[i].func)
+			KEYS[i].func(&(KEYS[i].arg));
 }
 
 void
@@ -795,7 +795,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
 	c->x = MAX(c->x, c->mon->wx);
 	c->y = MAX(c->y, c->mon->wy);
-	c->bw = borderpx;
+	c->bw = BORDERPX;
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -899,15 +899,15 @@ movemouse(const Arg *arg)
 
 			nx = ocx + (ev.xmotion.x - x);
 			ny = ocy + (ev.xmotion.y - y);
-			if (abs(selmon->wx - nx) < snap)
+			if (abs(selmon->wx - nx) < SNAP)
 				nx = selmon->wx;
-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < SNAP)
 				nx = selmon->wx + selmon->ww - WIDTH(c);
-			if (abs(selmon->wy - ny) < snap)
+			if (abs(selmon->wy - ny) < SNAP)
 				ny = selmon->wy;
-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < SNAP)
 				ny = selmon->wy + selmon->wh - HEIGHT(c);
-			if (!c->isfloating && (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+			if (!c->isfloating && (abs(nx - c->x) > SNAP || abs(ny - c->y) > SNAP))
 				togglefloating(NULL);
 			if (c->isfloating)
 				resize(c, nx, ny, c->w, c->h);
@@ -1045,7 +1045,7 @@ resizemouse(const Arg *arg)
 			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
 			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh)
 			{
-				if (!c->isfloating && (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
+				if (!c->isfloating && (abs(nw - c->w) > SNAP || abs(nh - c->h) > SNAP))
 					togglefloating(NULL);
 			}
 			if (c->isfloating)
@@ -1237,10 +1237,10 @@ setup(void)
 	sh = DisplayHeight(dpy, screen);
 	root = RootWindow(dpy, screen);
 	drw = drw_create(dpy, screen, root, sw, sh);
-	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
+	if (!drw_fontset_create(drw, FONTS, LENGTH(FONTS)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
-	bw=LENGTH(tags)*TEXTW(tags[0]);
+	bw=LENGTH(TAGS)*TEXTW(TAGS[0]);
 	bh = drw->fonts->h + 2;
 	updategeom();
 	/* init atoms */
@@ -1263,9 +1263,9 @@ setup(void)
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
 	/* init appearance */
-	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
-	for (i = 0; i < LENGTH(colors); i++)
-		scheme[i] = drw_scm_create(drw, colors[i], 3);
+	scheme = ecalloc(LENGTH(COLORS), sizeof(Clr *));
+	for (i = 0; i < LENGTH(COLORS); i++)
+		scheme[i] = drw_scm_create(drw, COLORS[i], 3);
 	/* init bars */
 	updatebars();
 	/* supporting window for NetWMCheck */
@@ -1327,7 +1327,7 @@ spawn(const Arg *arg)
 {
 	struct sigaction sa;
 
-	if (arg->v == dmenucmd)
+	if (arg->v == DMENUCMD)
 		dmenumon[0] = '0' + selmon->num;
 	if (fork() == 0) {
 		if (dpy)
@@ -1372,13 +1372,13 @@ tile(Monitor *m)
 	if (n == 0)
 		return;
 
-	if (n > nmaster)
-		mw = nmaster ? m->ww * mfact : 0;
+	if (n > NMASTER)
+		mw = NMASTER ? m->ww * MFACT : 0;
 	else
 		mw = m->ww;
 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < nmaster) {
-			h = (m->wh - my) / (MIN(n, nmaster) - i);
+		if (i < NMASTER) {
+			h = (m->wh - my) / (MIN(n, NMASTER) - i);
 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw));
 			if (my + HEIGHT(c) < m->wh)
 				my += HEIGHT(c);

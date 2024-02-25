@@ -1,19 +1,19 @@
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const char *fonts[]          = { "monospace:size=12" };
-static const char *colors[][3]      = {
+static const unsigned int BORDERPX  = 2;        /* border pixel of windows */
+static const unsigned int SNAP      = 32;       /* snap pixel */
+static const char *FONTS[]          = { "monospace:size=12" };
+static const char *COLORS[][3]      = {
 	/*               fg         bg (also used for borders)               */
 	[SchemeNorm] = { "#ffffff", "#000000" },
 	[SchemeSel]  = { "#ffffff", "#646464" },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5"};
+static const char *TAGS[] = { "1", "2", "3", "4", "5"};
 
 /* layout(s) */
-static const float mfact = 0.6; /* factor of master area size [0.05..0.95] */
-static const int nmaster = 1;    /* number of clients in master area */
+static const float MFACT = 0.6; /* factor of master area size [0.05..0.95] */
+static const int NMASTER = 1;    /* number of clients in master area */
 
 /* key definitions */
 #define ALT Mod1Mask
@@ -24,19 +24,19 @@ static const int nmaster = 1;    /* number of clients in master area */
 	{ SUPER|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} },
 
 /* pulseaudio volume control */
-static const char *upvol[]      = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "+10%",      NULL };
-static const char *downvol[]    = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "-10%",      NULL };
-static const char *mutevol[]    = { "/usr/bin/pactl",   "set-sink-mute",   "@DEFAULT_SINK@",      "toggle",   NULL };
+static const char *UPVOL[]      = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "+10%",      NULL };
+static const char *DOWNVOL[]    = { "/usr/bin/pactl",   "set-sink-volume", "@DEFAULT_SINK@",      "-10%",      NULL };
+static const char *MUTEVOL[]    = { "/usr/bin/pactl",   "set-sink-mute",   "@DEFAULT_SINK@",      "toggle",   NULL };
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *DMENUCMD[] = { "dmenu_run", "-m", dmenumon, NULL };
+static const char *TERMCMD[]  = { "st", NULL };
 
-static const Key keys[] = {
+static const Key KEYS[] = {
 	/*modifier                     key         function        argument */
-	{ SUPER,                       XK_r,       spawn,          {.v = dmenucmd } },
-	{ SUPER,                       XK_t,       spawn,          {.v = termcmd } },
+	{ SUPER,                       XK_r,       spawn,          {.v = DMENUCMD } },
+	{ SUPER,                       XK_t,       spawn,          {.v = TERMCMD } },
 	{ SUPER,                       XK_j,       focusstack,     {.i = +1 } },
 	{ SUPER,                       XK_k,       focusstack,     {.i = -1 } },
 	{ SUPER,                       XK_z, 	   zoom,           {0} },
@@ -54,14 +54,13 @@ static const Key keys[] = {
 	{ SUPER,                       XK_b,       togglebar,      {0} },
 
 	/* volume control */
-	{ ALT,                       XK_F3,  spawn, {.v = upvol   } },
-	{ ALT,                       XK_F2,  spawn, {.v = downvol } },
-	{ ALT,                       XK_F1,  spawn, {.v = mutevol } },
+	{ ALT,                       XK_F3,  spawn, {.v = UPVOL   } },
+	{ ALT,                       XK_F2,  spawn, {.v = DOWNVOL } },
+	{ ALT,                       XK_F1,  spawn, {.v = MUTEVOL } },
 };
 
 /* button definitions */
-/* click can be ClkClientWin, or ClkRootWin */
-static const Button buttons[] = {
+static const Button BUTTONS[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkClientWin,         SUPER,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         SUPER,         Button3,        resizemouse,    {0} },
