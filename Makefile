@@ -1,6 +1,6 @@
-SOURCES=$(wildcard *.c)
-HEADERS=$(wildcard *.h)
-OBJECTS=$(SOURCES:.c=.o)
+SOURCES = $(wildcard *.c)
+HEADERS = $(wildcard *.h)
+OBJECTS = $(SOURCES:.c=.o)
 
 dwm: $(OBJECTS)
 	gcc -o $@ $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
