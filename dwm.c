@@ -501,7 +501,7 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-	x=0;
+	x = 0;
 	for (i = 0; i < LENGTH(TAGS); i++) {
 		w = TEXTW(TAGS[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
