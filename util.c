@@ -6,15 +6,15 @@
 #include "util.h"
 
 void
-die(const char *fmt, ...)
+die(const char *FMT, ...)
 {
 	va_list ap;
 
-	va_start(ap, fmt);
-	vfprintf(stderr, fmt, ap);
+	va_start(ap, FMT);
+	vfprintf(stderr, FMT, ap);
 	va_end(ap);
 
-	if (fmt[0] && fmt[strlen(fmt)-1] == ':') {
+	if (FMT[0] && FMT[strlen(FMT)-1] == ':') {
 		fputc(' ', stderr);
 		perror(NULL);
 	} else {
