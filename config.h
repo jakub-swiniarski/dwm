@@ -39,9 +39,9 @@ static const Key KEYS[] = {
 	{ SUPER|ShiftMask, XK_l,   tagmon,     { .I = +1 } },
 	{ SUPER|ShiftMask, XK_q,   quit,       { 0 } },
 	{ SUPER,           XK_b,   togglebar,  { 0 } },
-	{ ALT,             XK_F3,  spawn,      {.V = UPVOL   } },
-	{ ALT,             XK_F2,  spawn,      {.V = DOWNVOL } },
-	{ ALT,             XK_F1,  spawn,      {.V = MUTEVOL } },
+	{ ALT,             XK_F3,  spawn,      { .V = UPVOL   } },
+	{ ALT,             XK_F2,  spawn,      { .V = DOWNVOL } },
+	{ ALT,             XK_F1,  spawn,      { .V = MUTEVOL } },
 	TAGKEYS(XK_1, 0)
 	TAGKEYS(XK_2, 1)
 	TAGKEYS(XK_3, 2)
