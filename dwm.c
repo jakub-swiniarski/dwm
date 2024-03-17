@@ -44,18 +44,18 @@ enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms *
 enum { ClkClientWin, ClkRootWin }; /* clicks */
 
 typedef union {
-	int i;
-	unsigned int ui;
-	float f;
-	const void *v;
+	const int I;
+	const unsigned int UI;
+	const float F;
+	const void *V;
 } Arg;
 
 typedef struct {
 	unsigned int click;
 	unsigned int mask;
 	unsigned int button;
-	void (*func)(const Arg *arg);
-	const Arg arg;
+	void (*func)(const Arg *ARG);
+	const Arg ARG;
 } Button;
 
 typedef struct Monitor Monitor;
@@ -78,7 +78,7 @@ typedef struct {
 	unsigned int mod;
 	KeySym keysym;
 	void (*func)(const Arg *);
-	const Arg arg;
+	const Arg ARG;
 } Key;
 
 struct Monitor {
@@ -118,27 +118,27 @@ static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
-static void focusmon(const Arg *arg);
-static void focusstack(const Arg *arg);
+static void focusmon(const Arg *ARG);
+static void focusstack(const Arg *ARG);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
 static void keypress(XEvent *e);
-static void killclient(const Arg *arg);
+static void killclient(const Arg *ARG);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
 static void motionnotify(XEvent *e);
-static void movemouse(const Arg *arg);
+static void movemouse(const Arg *ARG);
 static Client *nexttiled(Client *c);
 static void pop(Client *c);
 static void propertynotify(XEvent *e);
-static void quit(const Arg *arg);
+static void quit(const Arg *ARG);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h);
-static void resizemouse(const Arg *arg);
+static void resizemouse(const Arg *ARG);
 static void restack(Monitor *m);
 static void run(void);
 static void scan(void);
@@ -150,13 +150,13 @@ static void setfullscreen(Client *c, int fullscreen);
 static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
-static void spawn(const Arg *arg);
-static void tag(const Arg *arg);
-static void tagmon(const Arg *arg);
+static void spawn(const Arg *ARG);
+static void tag(const Arg *ARG);
+static void tagmon(const Arg *ARG);
 static void tile(Monitor *m);
-static void togglebar(const Arg *arg);
-static void togglefloating(const Arg *arg);
-static void toggleview(const Arg *arg);
+static void togglebar(const Arg *ARG);
+static void togglefloating(const Arg *ARG);
+static void toggleview(const Arg *ARG);
 static void unfocus(Client *c, int setfocus);
 static void unmanage(Client *c, int destroyed);
 static void unmapnotify(XEvent *e);
@@ -168,12 +168,12 @@ static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
-static void view(const Arg *arg);
+static void view(const Arg *ARG);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
-static void zoom(const Arg *arg);
+static void zoom(const Arg *ARG);
 
 /* variables */
 static int screen;
@@ -263,13 +263,13 @@ buttonpress(XEvent *e)
 	for (i = 0; i < LENGTH(BUTTONS); i++)
 		if (click == BUTTONS[i].click && BUTTONS[i].func && BUTTONS[i].button == ev->button
 		&& CLEANMASK(BUTTONS[i].mask) == CLEANMASK(ev->state))
-			BUTTONS[i].func(&BUTTONS[i].arg);
+			BUTTONS[i].func(&BUTTONS[i].ARG);
 }
 
 void
 cleanup(void)
 {
-	Arg a = {.ui = ~0};
+	Arg a = { .UI = ~0 };
 	Monitor *m;
 	size_t i;
 
@@ -589,13 +589,13 @@ focusin(XEvent *e)
 }
 
 void
-focusmon(const Arg *arg)
+focusmon(const Arg *ARG)
 {
 	Monitor *m;
 
 	if (!mons->next)
 		return;
-	if ((m = dirtomon(arg->i)) == selmon)
+	if ((m = dirtomon(ARG->I)) == selmon)
 		return;
 	unfocus(selmon->sel, 0);
 	selmon = m;
@@ -603,13 +603,13 @@ focusmon(const Arg *arg)
 }
 
 void
-focusstack(const Arg *arg)
+focusstack(const Arg *ARG)
 {
 	Client *c = NULL, *i;
 
 	if (!selmon->sel || selmon->sel->isfullscreen)
 		return;
-	if (arg->i > 0) {
+	if (ARG->I > 0) {
 		for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
 		if (!c)
 			for (c = selmon->clients; c && !ISVISIBLE(c); c = c->next);
@@ -746,11 +746,11 @@ keypress(XEvent *e)
 		if (keysym == KEYS[i].keysym
 		&& CLEANMASK(KEYS[i].mod) == CLEANMASK(ev->state)
 		&& KEYS[i].func)
-			KEYS[i].func(&(KEYS[i].arg));
+			KEYS[i].func(&(KEYS[i].ARG));
 }
 
 void
-killclient(const Arg *arg)
+killclient(const Arg *ARG)
 {
 	if (!selmon->sel)
 		return;
@@ -864,7 +864,7 @@ motionnotify(XEvent *e)
 }
 
 void
-movemouse(const Arg *arg)
+movemouse(const Arg *ARG)
 {
 	int x, y, ocx, ocy, nx, ny;
 	Client *c;
@@ -973,7 +973,7 @@ propertynotify(XEvent *e)
 }
 
 void
-quit(const Arg *arg)
+quit(const Arg *ARG)
 {
 	running = 0;
 }
@@ -1008,7 +1008,7 @@ resize(Client *c, int x, int y, int w, int h)
 }
 
 void
-resizemouse(const Arg *arg)
+resizemouse(const Arg *ARG)
 {
 	int ocx, ocy, nw, nh;
 	Client *c;
@@ -1323,11 +1323,11 @@ showhide(Client *c)
 }
 
 void
-spawn(const Arg *arg)
+spawn(const Arg *ARG)
 {
 	struct sigaction sa;
 
-	if (arg->v == DMENUCMD)
+	if (ARG->V == DMENUCMD)
 		dmenumon[0] = '0' + selmon->num;
 	if (fork() == 0) {
 		if (dpy)
@@ -1339,27 +1339,27 @@ spawn(const Arg *arg)
 		sa.sa_handler = SIG_DFL;
 		sigaction(SIGCHLD, &sa, NULL);
 
-		execvp(((char **)arg->v)[0], (char **)arg->v);
-		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
+		execvp(((char **)ARG->V)[0], (char **)ARG->V);
+		die("dwm: execvp '%s' failed:", ((char **)ARG->V)[0]);
 	}
 }
 
 void
-tag(const Arg *arg)
+tag(const Arg *ARG)
 {
-	if (selmon->sel && arg->ui & TAGMASK) {
-		selmon->sel->tags = arg->ui & TAGMASK;
+	if (selmon->sel && ARG->UI & TAGMASK) {
+		selmon->sel->tags = ARG->UI & TAGMASK;
 		focus(NULL);
 		arrange(selmon);
 	}
 }
 
 void
-tagmon(const Arg *arg)
+tagmon(const Arg *ARG)
 {
 	if (!selmon->sel || !mons->next)
 		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
+	sendmon(selmon->sel, dirtomon(ARG->I));
 }
 
 void
@@ -1391,7 +1391,7 @@ tile(Monitor *m)
 }
 
 void
-togglebar(const Arg *arg)
+togglebar(const Arg *ARG)
 {
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
@@ -1399,7 +1399,7 @@ togglebar(const Arg *arg)
 }
 
 void
-togglefloating(const Arg *arg)
+togglefloating(const Arg *ARG)
 {
 	if (!selmon->sel)
 		return;
@@ -1413,9 +1413,9 @@ togglefloating(const Arg *arg)
 }
 
 void
-toggleview(const Arg *arg)
+toggleview(const Arg *ARG)
 {
-	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
+	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (ARG->UI & TAGMASK);
 
 	if (newtagset) {
 		selmon->tagset[selmon->seltags] = newtagset;
@@ -1696,13 +1696,13 @@ updatewmhints(Client *c)
 }
 
 void
-view(const Arg *arg)
+view(const Arg *ARG)
 {
-	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
+	if ((ARG->UI & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
 	selmon->seltags ^= 1; /* toggle sel tagset */
-	if (arg->ui & TAGMASK)
-		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
+	if (ARG->UI & TAGMASK)
+		selmon->tagset[selmon->seltags] = ARG->UI & TAGMASK;
 	focus(NULL);
 	arrange(selmon);
 }
@@ -1765,7 +1765,7 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
 }
 
 void
-zoom(const Arg *arg)
+zoom(const Arg *ARG)
 {
 	Client *c = selmon->sel;
 
