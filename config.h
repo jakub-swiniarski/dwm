@@ -1,6 +1,6 @@
 static const unsigned int BORDERPX = 2;
 static const unsigned int SNAP = 32;
-static const char *FONTS[] = { "monospace:size=12" };
+static const char *FONT = "monospace:size=12";
 static const char *COLORS[][3] = {
 	[SchemeNorm] = { "#ffffff", "#000000" },
 	[SchemeSel]  = { "#ffffff", "#646464" },
