@@ -1237,7 +1237,7 @@ setup(void)
 	sh = DisplayHeight(dpy, screen);
 	root = RootWindow(dpy, screen);
 	drw = drw_create(dpy, screen, root, sw, sh);
-	if (!drw_fontset_create(drw, FONTS, LENGTH(FONTS)))
+	if (!drw_fontset_create(drw, FONT))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
 	bw=LENGTH(TAGS)*TEXTW(TAGS[0]);

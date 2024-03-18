@@ -30,7 +30,7 @@ void drw_resize(Drw *drw, unsigned int w, unsigned int h);
 void drw_free(Drw *drw);
 
 /* Fnt abstraction */
-Fnt *drw_fontset_create(Drw* drw, const char *FONTS[], size_t fontcount);
+Fnt *drw_fontset_create(Drw* drw, const char *FONT);
 void drw_fontset_free(Fnt* set);
 unsigned int drw_fontset_getwidth(Drw *drw, const char *TEXT);
 unsigned int drw_fontset_getwidth_clamp(Drw *drw, const char *TEXT, unsigned int n);
