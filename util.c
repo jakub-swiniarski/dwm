@@ -17,7 +17,8 @@ die(const char *FMT, ...)
 	if (FMT[0] && FMT[strlen(FMT)-1] == ':') {
 		fputc(' ', stderr);
 		perror(NULL);
-	} else {
+	}
+	else {
 		fputc('\n', stderr);
 	}
 
