@@ -123,16 +123,13 @@ xfont_create(Drw *drw, const char *FONTNAME, FcPattern *fontpattern)
 			XftFontClose(drw->dpy, xfont);
 			return NULL;
 		}
-	}
-	else if (fontpattern) {
+	} else if (fontpattern) {
 		if (!(xfont = XftFontOpenPattern(drw->dpy, fontpattern))) {
 			fprintf(stderr, "error, cannot load font from pattern.\n");
 			return NULL;
 		}
-	}
-	else {
+	} else
 		die("no font specified.");
-	}
 
 	font = ecalloc(1, sizeof(Fnt));
 	font->xfont = xfont;
@@ -258,8 +255,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 
 	if (!render) {
 		w = invert ? invert : ~invert;
-	}
-	else {
+	} else {
 		XSetForeground(drw->dpy, drw->gc, drw->scheme[invert ? ColFg : ColBg].pixel);
 		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
 		d = XftDrawCreate(drw->dpy, drw->drawable,
@@ -298,15 +294,12 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 							x += tmpw;
 						else
 							utf8strlen = ellipsis_len;
-					}
-					else if (curfont == usedfont) {
+					} else if (curfont == usedfont) {
 						utf8strlen += utf8charlen;
 						TEXT += utf8charlen;
 						ew += tmpw;
-					}
-					else {
+					} else
 						nextfont = curfont;
-					}
 					break;
 				}
 			}
@@ -331,12 +324,10 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 
 		if (!*TEXT || overflow) {
 			break;
-		}
-		else if (nextfont) {
+		} else if (nextfont) {
 			charexists = 0;
 			usedfont = nextfont;
-		}
-		else {
+		} else {
 			/* Regardless of whether or not a fallback font is found, the
 			 * character must be drawn. */
 			charexists = 1;
@@ -372,8 +363,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 					for (curfont = drw->fonts; curfont->next; curfont = curfont->next)
 						; /* NOP */
 					curfont->next = usedfont;
-				}
-				else {
+				} else {
 					xfont_free(usedfont);
 					nomatches.codepoint[++nomatches.idx % nomatches_len] = utf8codepoint;
 no_match:
