@@ -1240,7 +1240,7 @@ setup(void)
 	if (!drw_fontset_create(drw, FONT))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
-	bw=LENGTH(TAGS)*TEXTW(TAGS[0]);
+	bw = LENGTH(TAGS) * TEXTW(TAGS[0]);
 	bh = drw->fonts->h + 2;
 	updategeom();
 	/* init atoms */
