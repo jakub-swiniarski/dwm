@@ -6,7 +6,7 @@ static const char *COLORS[][3] = {
 	[SchemeSel]  = { "#ffffff", "#646464" },
 };
 
-static const char *TAGS[] = { "1", "2", "3", "4", "5"};
+static const char *TAGS[] = { "1", "2", "3", "4", "5" };
 
 static const float MFACT = 0.6;
 static const int NMASTER = 1;
