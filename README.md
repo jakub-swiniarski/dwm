@@ -1,22 +1,22 @@
 # DWM - Dynamic Window Manager
 This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://suckless.org).
 
-## Prerequisites:
-- gcc,
-- make,
-- xorg-server,
-- [st](https://github.com/jakub-swiniarski/st),
-- [dmenu](https://github.com/jakub-swiniarski/dmenu),
-- libx11,
-- libxft,
-- libxinerama.
+## Prerequisites
+- gcc
+- make
+- xorg-server
+- [st](https://github.com/jakub-swiniarski/st)
+- [dmenu](https://github.com/jakub-swiniarski/dmenu)
+- libx11
+- libxft
+- libxinerama
 
-## Changes:
-- removed many features that I don't use,
-- reduced amount of tags,
-- changed colors,
-- added volume control for PulseAudio,
-- centered status bar.
+## Changes
+- Removed many features that I don't use.
+- Reduced amount of tags.
+- Color changes.
+- Added volume control for PulseAudio.
+- Centered status bar.
 
 ## Keybindings
 ### Window and tag control
