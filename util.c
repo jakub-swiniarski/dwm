@@ -5,9 +5,7 @@
 
 #include "util.h"
 
-void
-die(const char *FMT, ...)
-{
+void die(const char *FMT, ...) {
 	va_list ap;
 
 	va_start(ap, FMT);
@@ -24,9 +22,7 @@ die(const char *FMT, ...)
 	exit(1);
 }
 
-void *
-ecalloc(size_t nmemb, size_t size)
-{
+void *ecalloc(size_t nmemb, size_t size) {
 	void *p;
 
 	if (!(p = calloc(nmemb, size)))
