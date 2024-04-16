@@ -5,14 +5,14 @@
 
 #include "util.h"
 
-void die(const char *FMT, ...) {
+void die(const char *fmt, ...) {
 	va_list ap;
 
-	va_start(ap, FMT);
-	vfprintf(stderr, FMT, ap);
+	va_start(ap, fmt);
+	vfprintf(stderr, fmt, ap);
 	va_end(ap);
 
-	if (FMT[0] && FMT[strlen(FMT)-1] == ':') {
+	if (fmt[0] && fmt[strlen(fmt)-1] == ':') {
 		fputc(' ', stderr);
 		perror(NULL);
 	} else {
