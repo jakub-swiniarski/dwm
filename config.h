@@ -1,5 +1,6 @@
 static const unsigned int borderpx = 2;
 static const unsigned int snap = 32;
+static const int topbar = 0;
 static const char *font = "monospace:size=12";
 static const char *colors[][3] = {
 	[SchemeNorm] = { "#ffffff", "#000000" },

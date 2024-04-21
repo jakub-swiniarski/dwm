@@ -1370,12 +1370,9 @@ void updatebars(void) {
 }
 
 void updatebarpos(Monitor *m) {
-	m->wy = m->my;
-	m->wh = m->mh;
-	if (m->showbar) {
-		m->by = m->wy + m->wh - bh;
-		m->wy = m->wy;
-	} else
+	if (m->showbar)
+		m->by = topbar ? m->my : m->my + m->mh - bh;
+	else
 		m->by = -bh;
 }
 
