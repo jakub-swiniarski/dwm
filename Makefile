@@ -13,12 +13,12 @@ dwm: $(OBJ)
 	gcc -o $@ $(OBJ) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
 
 clean:
-	rm *.o dwm
+	rm -f *.o dwm
 
 install: all
-	cp dwm /usr/local/bin/
+	cp -f dwm /usr/local/bin/
 
 uninstall:
-	rm /usr/local/bin/dwm
+	rm -f /usr/local/bin/dwm
 
 .PHONY: all clean install uninstall
