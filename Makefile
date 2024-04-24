@@ -1,20 +1,24 @@
-SOURCES = $(wildcard *.c)
-HEADERS = $(wildcard *.h)
-OBJECTS = $(SOURCES:.c=.o)
+SRC = $(wildcard *.c)
+HDR = $(wildcard *.h)
+OBJ = $(SRC:.c=.o)
 
-dwm: $(OBJECTS)
-	gcc -o $@ $(OBJECTS) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
+all: dwm
 
-$(OBJECTS): $(SOURCES) $(HEADERS)
-	gcc -c $(SOURCES) -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA
+%.o: %.c
+	gcc -c -O2 -pedantic -Wall -Wno-deprecated-declarations -O2 -I/usr/X11R6/include -I/usr/include/freetype2 -DXINERAMA $<
 
-.PHONY: clean install uninstall
+$(OBJ): $(HDR)
+
+dwm: $(OBJ)
+	gcc -o $@ $(OBJ) -L/usr/X11R6/lib -lX11 -lXinerama -lfontconfig -lXft
 
 clean:
-	rm -f dwm $(OBJECTS)
+	rm *.o dwm
 
-install: dwm
-	cp -f dwm /usr/local/bin/
+install: all
+	cp dwm /usr/local/bin/
 
 uninstall:
-	rm -f /usr/local/bin/dwm 
+	rm /usr/local/bin/dwm
+
+.PHONY: all clean install uninstall
