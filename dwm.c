@@ -24,8 +24,8 @@
 /* macros */
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
-#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
-                               * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+#define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->mx+(m)->mw) - MAX((x),(m)->mx)) \
+                               * MAX(0, MIN((y)+(h),(m)->my+(m)->mh) - MAX((y),(m)->my)))
 #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
 #define LENGTH(X)               (sizeof X / sizeof X[0])
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
@@ -85,7 +85,6 @@ struct Monitor {
 	int num;
 	int by;               /* bar geometry */
 	int mx, my, mw, mh;   /* screen size */
-	int wx, wy, ww, wh;   /* window area  */
 	unsigned int seltags;
 	unsigned int tagset[2];
 	int showbar;
@@ -347,7 +346,7 @@ void configurenotify(XEvent *e) {
 				for (c = m->clients; c; c = c->next)
 					if (c->isfullscreen)
 						resize(c, m->mx, m->my, m->mw, m->mh);
-				XMoveResizeWindow(dpy, m->barwin, m->wx + m->ww / 2 - bw / 2, m->by, bw, bh);
+				XMoveResizeWindow(dpy, m->barwin, m->mx + m->mw / 2 - bw / 2, m->by, bw, bh);
 			}
 			focus(NULL);
 			arrange(NULL);
@@ -725,12 +724,12 @@ void manage(Window w, XWindowAttributes *wa) {
 		c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
 	}
 
-	if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
-		c->x = c->mon->wx + c->mon->ww - WIDTH(c);
-	if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
-		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
-	c->x = MAX(c->x, c->mon->wx);
-	c->y = MAX(c->y, c->mon->wy);
+	if (c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
+		c->x = c->mon->mx + c->mon->mw - WIDTH(c);
+	if (c->y + HEIGHT(c) > c->mon->my + c->mon->mh)
+		c->y = c->mon->my + c->mon->mh - HEIGHT(c);
+	c->x = MAX(c->x, c->mon->mx);
+	c->y = MAX(c->y, c->mon->my);
 	c->bw = borderpx;
 
 	wc.border_width = c->bw;
@@ -827,14 +826,14 @@ void movemouse(const Arg *arg) {
 
 			nx = ocx + (ev.xmotion.x - x);
 			ny = ocy + (ev.xmotion.y - y);
-			if (abs(selmon->wx - nx) < snap)
-				nx = selmon->wx;
-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
-				nx = selmon->wx + selmon->ww - WIDTH(c);
-			if (abs(selmon->wy - ny) < snap)
-				ny = selmon->wy;
-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
-				ny = selmon->wy + selmon->wh - HEIGHT(c);
+			if (abs(selmon->mx - nx) < snap)
+				nx = selmon->mx;
+			else if (abs((selmon->mx + selmon->mw) - (nx + WIDTH(c))) < snap)
+				nx = selmon->mx + selmon->mw - WIDTH(c);
+			if (abs(selmon->my - ny) < snap)
+				ny = selmon->my;
+			else if (abs((selmon->my + selmon->mh) - (ny + HEIGHT(c))) < snap)
+				ny = selmon->my + selmon->mh - HEIGHT(c);
 			if (!c->isfloating && (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
 				togglefloating(NULL);
 			if (c->isfloating)
@@ -956,8 +955,8 @@ void resizemouse(const Arg *arg) {
 
 			nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
 			nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
-			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
-			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh)
+			if (c->mon->mx + nw >= selmon->mx && c->mon->mx + nw <= selmon->mx + selmon->mw
+			&& c->mon->my + nh >= selmon->my && c->mon->my + nh <= selmon->my + selmon->mh)
 			{
 				if (!c->isfloating && (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
 					togglefloating(NULL);
@@ -1257,19 +1256,19 @@ void tile(Monitor *m) {
 		return;
 
 	if (n > nmaster)
-		mw = nmaster ? m->ww * mfact : 0;
+		mw = nmaster ? m->mw * mfact : 0;
 	else
-		mw = m->ww;
+		mw = m->mw;
 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < nmaster) {
-			h = (m->wh - my) / (MIN(n, nmaster) - i);
-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw));
-			if (my + HEIGHT(c) < m->wh)
+			h = (m->mh - my) / (MIN(n, nmaster) - i);
+			resize(c, m->mx, m->my + my, mw - (2*c->bw), h - (2*c->bw)); /* TODO: FORMATTING */
+			if (my + HEIGHT(c) < m->mh)
 				my += HEIGHT(c);
 		} else {
-			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw));
-			if (ty + HEIGHT(c) < m->wh)
+			h = (m->mh - ty) / (n - i);
+			resize(c, m->mx + mw, m->my + ty, m->mw - mw - (2*c->bw), h - (2*c->bw));
+			if (ty + HEIGHT(c) < m->mh)
 				ty += HEIGHT(c);
 		}
 }
@@ -1277,7 +1276,7 @@ void tile(Monitor *m) {
 void togglebar(const Arg *arg) {
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx+selmon->ww/2-bw/2, selmon->by, bw, bh);
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->mw/2-bw/2, selmon->by, bw, bh); /* TODO FORMATTING */
 }
 
 void togglefloating(const Arg *arg) {
@@ -1360,7 +1359,7 @@ void updatebars(void) {
 	for (m = mons; m; m = m->next) {
 		if (m->barwin)
 			continue; 
-		m->barwin = XCreateWindow(dpy, root, m->wx + m->ww / 2 - bw / 2, m->by, bw, bh, 0, DefaultDepth(dpy, screen),
+		m->barwin = XCreateWindow(dpy, root, m->mx + m->mw / 2 - bw / 2, m->by, bw, bh, 0, DefaultDepth(dpy, screen),
 				CopyFromParent, DefaultVisual(dpy, screen),
 				CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
 		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
@@ -1423,10 +1422,10 @@ int updategeom(void) {
 			{
 				dirty = 1;
 				m->num = i;
-				m->mx = m->wx = unique[i].x_org;
-				m->my = m->wy = unique[i].y_org;
-				m->mw = m->ww = unique[i].width;
-				m->mh = m->wh = unique[i].height;
+				m->mx = unique[i].x_org;
+				m->my = unique[i].y_org;
+				m->mw = unique[i].width;
+				m->mh = unique[i].height;
 				updatebarpos(m);
 			}
 		/* removed monitors if n > nn */
@@ -1452,8 +1451,8 @@ int updategeom(void) {
 			mons = createmon();
 		if (mons->mw != sw || mons->mh != sh) {
 			dirty = 1;
-			mons->mw = mons->ww = sw;
-			mons->mh = mons->wh = sh;
+			mons->mw = sw;
+			mons->mh = sh;
 			updatebarpos(mons);
 		}
 	}
