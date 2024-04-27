@@ -1262,12 +1262,12 @@ void tile(Monitor *m) {
 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < nmaster) {
 			h = (m->mh - my) / (MIN(n, nmaster) - i);
-			resize(c, m->mx, m->my + my, mw - (2*c->bw), h - (2*c->bw)); /* TODO: FORMATTING */
+			resize(c, m->mx, m->my + my, mw - (2 * c->bw), h - (2 * c->bw));
 			if (my + HEIGHT(c) < m->mh)
 				my += HEIGHT(c);
 		} else {
 			h = (m->mh - ty) / (n - i);
-			resize(c, m->mx + mw, m->my + ty, m->mw - mw - (2*c->bw), h - (2*c->bw));
+			resize(c, m->mx + mw, m->my + ty, m->mw - mw - (2 * c->bw), h - (2 * c->bw));
 			if (ty + HEIGHT(c) < m->mh)
 				ty += HEIGHT(c);
 		}
@@ -1276,7 +1276,7 @@ void tile(Monitor *m) {
 void togglebar(const Arg *arg) {
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->mw/2-bw/2, selmon->by, bw, bh); /* TODO FORMATTING */
+	XMoveResizeWindow(dpy, selmon->barwin, selmon->mx+selmon->mw / 2 - bw / 2, selmon->by, bw, bh);
 }
 
 void togglefloating(const Arg *arg) {
