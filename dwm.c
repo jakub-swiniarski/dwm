@@ -64,7 +64,7 @@ struct Client {
 	float mina, maxa;
 	int x, y, w, h;
 	int oldx, oldy, oldw, oldh;
-	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
+	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
@@ -876,9 +876,6 @@ void propertynotify(XEvent *e) {
 				(c->isfloating = (wintoclient(trans)) != NULL))
 				arrange(c->mon);
 			break;
-		case XA_WM_NORMAL_HINTS:
-			c->hintsvalid = 0;
-			break;
 		case XA_WM_HINTS:
 			updatewmhints(c);
 			drawbars();
@@ -1516,7 +1513,6 @@ void updatesizehints(Client *c) {
 	} else
 		c->maxa = c->mina = 0.0;
 	c->isfixed = (c->maxw && c->maxh && c->maxw == c->minw && c->maxh == c->minh);
-	c->hintsvalid = 1;
 }
 
 void updatewindowtype(Client *c) {
