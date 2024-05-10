@@ -4,7 +4,7 @@ static const int topbar = 0;
 static const char *font = "monospace:size=12";
 static const char *colors[][3] = {
 	[SchemeNorm] = { "#ffffff", "#000000" },
-	[SchemeSel]  = { "#ffffff", "#0096c8" },
+	[SchemeSel]  = { "#ffffff", "#0066aa" },
 };
 
 static const char *tags[] = { "1", "2", "3", "4", "5" };
