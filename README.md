@@ -28,6 +28,6 @@ This is a fork of [dwm](https://dwm.suckless.org/) from [suckless.org](https://s
 **See more in config.h**
 
 ### Volume control (PulseAudio)
-- Alt + F1 - mute the sound
-- Alt + F2 - decrease the volume
-- Alt + F3 - increase the volume
+- Super + F1 - mute the sound
+- Super + F2 - decrease the volume
+- Super + F3 - increase the volume

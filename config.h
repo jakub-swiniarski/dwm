@@ -12,12 +12,11 @@ static const char *tags[] = { "1", "2", "3", "4", "5" };
 static const float mfact = 0.6;
 static const int nmaster = 1;
 
-#define ALT Mod1Mask
-#define SUPER Mod4Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ SUPER,             KEY, view,       { .ui = 1 << TAG} }, \
-	{ SUPER|ControlMask, KEY, toggleview, { .ui = 1 << TAG} }, \
-	{ SUPER|ShiftMask,   KEY, tag,        { .ui = 1 << TAG} },
+	{ MODKEY,             KEY, view,       { .ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask, KEY, toggleview, { .ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,   KEY, tag,        { .ui = 1 << TAG} },
 
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+10%",   NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-10%",   NULL };
@@ -28,21 +27,21 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
-	{ SUPER,           XK_r,   spawn,      { .v = dmenucmd } },
-	{ SUPER,           XK_t,   spawn,      { .v = termcmd } },
-	{ SUPER,           XK_j,   focusstack, { .i = +1 } },
-	{ SUPER,           XK_k,   focusstack, { .i = -1 } },
-	{ SUPER,           XK_z,   zoom,       { 0 } },
-	{ SUPER,		   XK_c,   killclient, { 0 } },
-	{ SUPER,           XK_h,   focusmon,   { .i = -1 } },
-	{ SUPER,           XK_l,   focusmon,   { .i = +1 } },
-	{ SUPER|ShiftMask, XK_h,   tagmon,     { .i = -1 } },
-	{ SUPER|ShiftMask, XK_l,   tagmon,     { .i = +1 } },
-	{ SUPER|ShiftMask, XK_q,   quit,       { 0 } },
-	{ SUPER,           XK_b,   togglebar,  { 0 } },
-	{ ALT,             XK_F3,  spawn,      { .v = upvol   } },
-	{ ALT,             XK_F2,  spawn,      { .v = downvol } },
-	{ ALT,             XK_F1,  spawn,      { .v = mutevol } },
+	{ MODKEY,           XK_r,   spawn,      { .v = dmenucmd } },
+	{ MODKEY,           XK_t,   spawn,      { .v = termcmd } },
+	{ MODKEY,           XK_j,   focusstack, { .i = +1 } },
+	{ MODKEY,           XK_k,   focusstack, { .i = -1 } },
+	{ MODKEY,           XK_z,   zoom,       { 0 } },
+	{ MODKEY,		    XK_c,   killclient, { 0 } },
+	{ MODKEY,           XK_h,   focusmon,   { .i = -1 } },
+	{ MODKEY,           XK_l,   focusmon,   { .i = +1 } },
+	{ MODKEY|ShiftMask, XK_h,   tagmon,     { .i = -1 } },
+	{ MODKEY|ShiftMask, XK_l,   tagmon,     { .i = +1 } },
+	{ MODKEY|ShiftMask, XK_q,   quit,       { 0 } },
+	{ MODKEY,           XK_b,   togglebar,  { 0 } },
+	{ MODKEY,           XK_F3,  spawn,      { .v = upvol   } },
+	{ MODKEY,           XK_F2,  spawn,      { .v = downvol } },
+	{ MODKEY,           XK_F1,  spawn,      { .v = mutevol } },
 	TAGKEYS(XK_1, 0)
 	TAGKEYS(XK_2, 1)
 	TAGKEYS(XK_3, 2)
@@ -51,7 +50,7 @@ static const Key keys[] = {
 };
 
 static const Button buttons[] = {
-	{ ClkClientWin, SUPER, Button1, movemouse,   { 0 } },
-	{ ClkClientWin, SUPER, Button3, resizemouse, { 0 } },
+	{ ClkClientWin, MODKEY, Button1, movemouse,   { 0 } },
+	{ ClkClientWin, MODKEY, Button3, resizemouse, { 0 } },
 };
 
