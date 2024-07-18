@@ -1,8 +1,8 @@
 static const unsigned int borderpx = 2;
-static const unsigned int snap = 32;
-static const int topbar = 0;
-static const char *font = "monospace:size=12";
-static const char *colors[][3] = {
+static const unsigned int snap     = 32;
+static const int topbar            = 0;
+static const char *font            = "monospace:size=12";
+static const char *colors[][3]     = {
 	[SchemeNorm] = { "#ffffff", "#000000" },
 	[SchemeSel]  = { "#ffffff", "#0066aa" },
 };
@@ -22,7 +22,7 @@ static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-10%",   NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
 
-static char dmenumon[2] = "0";
+static char dmenumon[2]       = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
