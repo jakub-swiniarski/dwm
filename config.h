@@ -27,21 +27,22 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
-	{ MODKEY,           XK_r,   spawn,      { .v = dmenucmd } },
-	{ MODKEY,           XK_t,   spawn,      { .v = termcmd } },
-	{ MODKEY,           XK_j,   focusstack, { .i = +1 } },
-	{ MODKEY,           XK_k,   focusstack, { .i = -1 } },
-	{ MODKEY,           XK_z,   zoom,       { 0 } },
-	{ MODKEY,		    XK_c,   killclient, { 0 } },
-	{ MODKEY,           XK_h,   focusmon,   { .i = -1 } },
-	{ MODKEY,           XK_l,   focusmon,   { .i = +1 } },
-	{ MODKEY|ShiftMask, XK_h,   tagmon,     { .i = -1 } },
-	{ MODKEY|ShiftMask, XK_l,   tagmon,     { .i = +1 } },
-	{ MODKEY|ShiftMask, XK_q,   quit,       { 0 } },
-	{ MODKEY,           XK_b,   togglebar,  { 0 } },
-	{ MODKEY,           XK_F3,  spawn,      { .v = upvol   } },
-	{ MODKEY,           XK_F2,  spawn,      { .v = downvol } },
-	{ MODKEY,           XK_F1,  spawn,      { .v = mutevol } },
+	{ MODKEY,           XK_r,  spawn,          { .v = dmenucmd } },
+	{ MODKEY,           XK_t,  spawn,          { .v = termcmd } },
+	{ MODKEY,           XK_j,  focusstack,     { .i = +1 } },
+	{ MODKEY,           XK_k,  focusstack,     { .i = -1 } },
+	{ MODKEY,           XK_z,  zoom,           { 0 } },
+	{ MODKEY,           XK_c,  killclient,     { 0 } },
+	{ MODKEY,           XK_h,  focusmon,       { .i = -1 } },
+	{ MODKEY,           XK_l,  focusmon,       { .i = +1 } },
+	{ MODKEY|ShiftMask, XK_h,  tagmon,         { .i = -1 } },
+	{ MODKEY|ShiftMask, XK_l,  tagmon,         { .i = +1 } },
+	{ MODKEY|ShiftMask, XK_q,  quit,           { 0 } },
+	{ MODKEY,           XK_b,  togglebar,      { 0 } },
+	{ MODKEY,           XK_f,  togglefloating, {0} },
+	{ MODKEY,           XK_F3, spawn,          { .v = upvol   } },
+	{ MODKEY,           XK_F2, spawn,          { .v = downvol } },
+	{ MODKEY,           XK_F1, spawn,          { .v = mutevol } },
 	TAGKEYS(XK_1, 0)
 	TAGKEYS(XK_2, 1)
 	TAGKEYS(XK_3, 2)
